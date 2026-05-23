@@ -13,8 +13,19 @@ async function dbConnect():Promise<void>{
     }
 
     try {
-        
-        const db = await mongoose.connect(process.env.MONGODB_URI || "");
+        const mongoUri = process.env.MONGODB_URI;
+
+        if (!mongoUri) {
+            throw new Error("MONGODB_URI is not set");
+        }
+
+        if (mongoUri.includes("<") || mongoUri.includes(">")) {
+            throw new Error(
+                "MONGODB_URI still contains placeholder brackets. Remove the < and > around your MongoDB password."
+            );
+        }
+
+        const db = await mongoose.connect(mongoUri);
         connection.isConnected = db.connections[0].readyState;
         console.log(connection);
         console.log("DB Connected Succesfully");

@@ -1,15 +1,3 @@
-import {
-  Html,
-  Head,
-  Font,
-  Preview,
-  Heading,
-  Row,
-  Section,
-  Text,
-  Button,
-} from '@react-email/components';
-
 interface VerificationEmailProps {
   username: string;
   otp: string;
@@ -17,48 +5,56 @@ interface VerificationEmailProps {
 
 export default function VerificationEmail({ username, otp }: VerificationEmailProps) {
   return (
-    <Html lang="en" dir="ltr">
-      <Head>
+    <html lang="en">
+      <head>
         <title>Verification Code</title>
-        <Font
-          fontFamily="Roboto"
-          fallbackFontFamily="Verdana"
-          webFont={{
-            url: 'https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
-            format: 'woff2',
+      </head>
+      <body
+        style={{
+          margin: 0,
+          padding: "24px",
+          backgroundColor: "#f4f4f5",
+          fontFamily: "Arial, sans-serif",
+          color: "#18181b",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "480px",
+            margin: "0 auto",
+            backgroundColor: "#ffffff",
+            borderRadius: "12px",
+            padding: "32px",
+            boxShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
           }}
-          fontWeight={400}
-          fontStyle="normal"
-        />
-      </Head>
-      <Preview>Here&apos;s your verification code: {otp}</Preview>
-      <Section>
-        <Row>
-          <Heading as="h2">Hello {username},</Heading>
-        </Row>
-        <Row>
-          <Text>
-            Thank you for registering. Please use the following verification
-            code to complete your registration:
-          </Text>
-        </Row>
-        <Row>
-          <Text>{otp}</Text> 
-        </Row>
-        <Row>
-          <Text>
-            If you did not request this code, please ignore this email.
-          </Text>
-        </Row>
-        {/* <Row>
-          <Button
-            href={`http://localhost:3000/verify/${username}`}
-            style={{ color: '#61dafb' }}
+        >
+          <p style={{ fontSize: "14px", color: "#52525b", margin: "0 0 16px" }}>
+            Here&apos;s your verification code: {otp}
+          </p>
+          <h2 style={{ margin: "0 0 16px", fontSize: "24px" }}>Hello {username},</h2>
+          <p style={{ margin: "0 0 16px", lineHeight: 1.6 }}>
+            Thank you for registering. Please use the following verification code to
+            complete your registration:
+          </p>
+          <div
+            style={{
+              margin: "0 0 16px",
+              padding: "16px",
+              textAlign: "center",
+              fontSize: "32px",
+              fontWeight: 700,
+              letterSpacing: "8px",
+              backgroundColor: "#f4f4f5",
+              borderRadius: "10px",
+            }}
           >
-            Verify here
-          </Button>
-        </Row> */}
-      </Section>
-    </Html>
+            {otp}
+          </div>
+          <p style={{ margin: 0, lineHeight: 1.6, color: "#52525b" }}>
+            If you did not request this code, please ignore this email.
+          </p>
+        </div>
+      </body>
+    </html>
   );
 }
